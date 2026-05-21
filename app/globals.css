@@ -1,0 +1,218 @@
+@import "tailwindcss";
+
+:root {
+  --background: #500000;
+  --foreground: white;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-inter: var(--font-inter);
+  --font-lora: var(--font-lora);
+  --font-poppins: var(--font-poppins);
+
+  --animate-float: float 4s ease-in-out infinite;
+  --animate-scroll: scrollX 80s linear infinite;
+  --animate-scroll-y-down: scrollYDown 20s linear infinite;
+  --animate-scroll-y-down-slow: scrollYDown 30s linear infinite;
+  --animate-fade-in-up: fadeInUp 1s ease-out forwards;
+
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes scrollX {
+    0% {
+      transform: translateX(0);
+    }
+
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes scrollYDown {
+    0% {
+      transform: translateY(-50%);
+    }
+
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  scroll-behavior: smooth;
+}
+
+.navbar {
+  height: 100vh;
+}
+@utility animate-scroll {
+  display: flex;
+  width: max-content;
+}
+
+@utility animate-scroll-y-down {
+  display: flex;
+  flex-direction: column;
+}
+
+@utility animate-scroll-y-down-slow {
+  display: flex;
+  flex-direction: column;
+}
+
+.animation-delay-200 {
+  animation-delay: 200ms;
+}
+
+.animation-delay-400 {
+  animation-delay: 400ms;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 1s ease-out forwards;
+}
+
+@layer utilities {
+
+  /* Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+  }
+}
+
+.wm {
+  position: absolute;
+  inset: -20% -10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0;
+  pointer-events: none;
+  transform: rotate(-5deg);
+  opacity: 0.07;
+  overflow: hidden;
+  user-select: none;
+  font-size: clamp(1.75rem, 9vw, 5rem);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+}
+
+@media (min-width: 640px) {
+  .wm {
+    transform: rotate(-6deg);
+    opacity: 0.06;
+    font-size: clamp(2.25rem, 10vw, 6.5rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .wm {
+    transform: rotate(-7deg);
+    font-size: clamp(2.75rem, 12vw + 1rem, 8.5rem);
+  }
+}
+
+.wm-row {
+  display: flex;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+.wm-track {
+  flex-shrink: 0;
+}
+
+.wm-row img.wm-track {
+  height: 4rem;
+  width: auto;
+  display: block;
+  margin-right: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .wm-row img.wm-track {
+    height: 8rem;
+    margin-right: 2rem;
+  }
+}
+
+.wm-scroll-left .wm-track {
+  animation: wm-scroll-left 30s linear infinite;
+}
+
+.wm-scroll-right .wm-track {
+  animation: wm-scroll-right 30s linear infinite;
+}
+
+@media (max-width: 640px) {
+  .wm-row:nth-child(even) {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wm-scroll-left .wm-track,
+  .wm-scroll-right .wm-track {
+    animation: none;
+  }
+}
+
+@keyframes wm-scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes wm-scroll-right {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}

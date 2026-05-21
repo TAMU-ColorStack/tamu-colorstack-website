@@ -1,0 +1,21 @@
+/* [project]/components/layout/Footer/ImageHover.module.css [app-client] (css) */
+.ImageHover-module__ZHxEYW__imageWrapper {
+  justify-content: center;
+  align-items: center;
+  padding-top: 15px;
+  padding-left: 12px;
+  display: flex;
+  overflow: visible;
+}
+
+.ImageHover-module__ZHxEYW__hoverImage {
+  width: 25px;
+  height: 25px;
+  transition: transform .167s ease-in-out;
+}
+
+.ImageHover-module__ZHxEYW__imageWrapper .ImageHover-module__ZHxEYW__hoverImage:hover {
+  transform: scale(1.167);
+}
+
+/*# sourceMappingURL=components_layout_Footer_ImageHover_module_css_0w3-wzy._.single.css.map*/

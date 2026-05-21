@@ -1,0 +1,21 @@
+/*all gemini and gpt-mini*/
+
+.imageWrapper {
+    overflow: visible;
+    display: flex;
+    justify-content: center;
+    padding-top: 15px;
+    padding-left: 12px;
+    align-items: center;
+}
+
+.hoverImage {
+    transition: transform 0.167s ease-in-out;
+    width: 25;
+    height: 25;
+}
+
+.imageWrapper .hoverImage:hover {
+    transform: scale(1.167); /*zoom in 10%*/
+    /*change the image on hover to a darker, brownish shade*/
+}

@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/components/layout/Footer/ImageHover.module.css"],"sourcesContent":["/*all gemini and gpt-mini*/\r\n\r\n.imageWrapper {\r\n    overflow: visible;\r\n    display: flex;\r\n    justify-content: center;\r\n    padding-top: 15px;\r\n    padding-left: 12px;\r\n    align-items: center;\r\n}\r\n\r\n.hoverImage {\r\n    transition: transform 0.167s ease-in-out;\r\n    width: 25;\r\n    height: 25;\r\n}\r\n\r\n.imageWrapper .hoverImage:hover {\r\n    transform: scale(1.167); /*zoom in 10%*/\r\n    /*change the image on hover to a darker, brownish shade*/\r\n}"],"names":[],"mappings":"AAEA;;;;;;;;;AASA;;;;;;AAMA"}}]
+}
