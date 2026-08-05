@@ -49,6 +49,10 @@ export default function Footer() {
         </div>
       </div>
       <div className={styles.imageWrapper}>{icon_array.map((icon, i) => AddIcon(icon[0], icon[1], icon[2], i))}</div>
+            <p className="text-center pt-[25px] max-w-3/4 text-xs font-light text-white/70">
+        ColorStack at Texas A&amp;M University is a chapter of ColorStack, a 501(c)(3) nonprofit organization. EIN:
+        85-1248712
+      </p>
     </div>
   );
 }
