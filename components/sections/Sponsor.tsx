@@ -169,7 +169,7 @@ export default function Sponsor() {
             <motion.a
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              href="/TAMU_ColorStack_Sponsorship.pdf"
+              href="/TAMU_ColorStack_Corporate_Sponsorship.pdf"
               download
               target="_blank"
               rel="noopener noreferrer"
