@@ -15,7 +15,7 @@ export default function Officers() {
       image: '/officers/romina.jpg',
     },
     {
-      name: 'Alex Fontaine',
+      name: 'Axel Fontaine',
       role: 'Vice-President',
       likes: 'Computer Science',
       dislikes: '2027',
