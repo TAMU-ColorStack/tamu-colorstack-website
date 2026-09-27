@@ -53,7 +53,7 @@ export default function Hero() {
             style={{ animationDelay: '300ms', animationFillMode: 'forwards' }}
           >
             <a
-              href="https://docs.google.com/forms/d/e/1FAIpQLSd7XhHese9Nl5zMt3_j6fbc_5f-KT7UIxPFH2HF5cJDGDqJ2A/viewform"
+              href="https://tamu-color-stack.notion.site/37ca94751a9e80858340f2b327e151d1?pvs=105"
               target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-3 bg-[#E8A820] text-[#500000] text-base font-bold rounded-full hover:bg-[#d4991c] hover:scale-105 transition-all duration-300 shadow-[0_0_20px_rgba(232,168,32,0.3)] hover:shadow-[0_0_30px_rgba(232,168,32,0.5)]"
