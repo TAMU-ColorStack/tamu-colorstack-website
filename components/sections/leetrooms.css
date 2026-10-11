@@ -1,0 +1,41 @@
+/* Reset margins and ensure the page takes up the full screen height */
+html, body {
+  margin: 0;
+  height: 100vh;
+  background-color: #08deff;
+}
+
+/* Center the grid container in the middle of the screen */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Creates a 2x2 grid that scales to fill most of the screen */
+.leetroomblock {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 equal columns */
+    grid-template-rows: repeat(2, 1fr);    /* 2 equal rows */
+    gap: 20px;                             /* Space between blocks */
+    width: 85vw;                           /* Takes up 85% of screen width */
+    height: 85vh;                          /* Takes up 85% of screen height */
+    max-width: 900px;                      /* Optional limit so they don't get absurdly huge on giant monitors */
+    max-height: 900px;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 12px;
+}
+
+/* Individual blocks will automatically stretch to fill the grid cells */
+.leetroom {
+  background-color: #c51e0b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-family: sans-serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-radius: 8px;
+}
