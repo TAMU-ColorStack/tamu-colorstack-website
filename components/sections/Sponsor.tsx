@@ -1,18 +1,60 @@
 'use client';
 
 import Image from 'next/image';
-import { useRef, useState } from 'react';
+import { useRef, useState, type FormEvent } from 'react';
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
+
+
+
+  
 
 export default function Sponsor() {
   const containerRef = useRef<HTMLDivElement>(null);
-
+  
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end end'],
   });
 
   const [step, setStep] = useState(1);
+  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
+
+  const fieldClass =
+    'block w-full rounded-xl border border-white/20 bg-[#FAF3E0] px-4 py-2.5 text-base font-normal text-[#500000] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FCB432]';
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (status === 'sending') return;
+
+    const form = event.currentTarget;
+    const fields = new FormData(form);
+    setStatus('sending');
+
+    try {
+      const response = await fetch('https://formspree.io/f/maeoebgv', {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: fields,
+      });
+
+      if (!response.ok) {
+        setStatus('error');
+        return;
+      }
+
+      form.reset();
+      setStatus('sent');
+    } catch {
+      setStatus('error');
+    }
+  }
+
+  // 1. Define state with type inference (implicitly typed as string)
+  const [textValue, setTextValue] = useState<string>('');
+  // 2. Strongly type the change event handler
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTextValue(event.target.value);
+  };
 
   // ========================================================================
   // 1. SCROLL LENGTHS (CHECKPOINTS)
@@ -29,9 +71,11 @@ export default function Sponsor() {
       nextStep = 3; // 30% - 45%: Full Screen 1
     else if (latest < 0.6)
       nextStep = 4; // 45% - 60%: Full Screen 2
-    else if (latest < 0.8)
+    else if (latest < 0.75)
       nextStep = 5; // 60% - 80%: Full Screen 3
-    else nextStep = 6; // 80% - 100%: Download Slide
+    else if (latest < 0.9)
+      nextStep = 6; // 80% - 90%: Download Slide
+    else nextStep = 7; // 90% - 100%: Contact Info Page
 
     setStep((prev) => (prev !== nextStep ? nextStep : prev));
   });
@@ -177,6 +221,88 @@ export default function Sponsor() {
             >
               Download Sponsorship Packet
             </motion.a>
+          </div>
+        </motion.div>
+        {/* --- Slide 5: Sponsor Reach Out-FORM --- */}
+        <motion.div
+          animate={{ opacity: step === 7 ? 1 : 0 }}
+          transition={transitionConfig}
+          aria-hidden={step !== 7}
+          className={`absolute inset-0 z-50 overflow-y-auto bg-[#500000] ${
+            step === 7 ? 'pointer-events-auto' : 'pointer-events-none'
+          }`}
+        >
+          <div className="flex min-h-full flex-col justify-center px-5 py-8 sm:px-8">
+            <form
+              onSubmit={handleSubmit}
+              aria-labelledby="sponsor-contact-title"
+              className="mx-auto w-full max-w-[42rem] font-poppins"
+            >
+              <h3
+                id="sponsor-contact-title"
+                className="mb-5 text-center font-lora text-3xl font-bold text-[#FCB432] sm:text-4xl"
+              >
+                Reach Out to Us
+              </h3>
+
+              <fieldset
+                disabled={step !== 7 || status === 'sending'}
+                className="min-w-0 space-y-3 border-0 p-0 text-sm font-medium text-[#FAF3E0]"
+              >
+                <label className="block space-y-1">
+                  <span>Sponsor Name</span>
+                  <input name="name" autoComplete="name" required className={fieldClass} />
+                </label>
+
+                <label className="block space-y-1">
+                  <span>Company / Organization</span>
+                  <input
+                    name="company"
+                    autoComplete="organization"
+                    required
+                    className={fieldClass}
+                  />
+                </label>
+
+                <label className="block space-y-1">
+                  <span>Company Email</span>
+                  <input
+                    type="email"
+                    name="email"
+                    autoComplete="email"
+                    required
+                    className={fieldClass}
+                  />
+                </label>
+
+                <label className="block space-y-1">
+                  <span>Subject</span>
+                  <input name="subject" required className={fieldClass} />
+                </label>
+
+                <label className="block space-y-1">
+                  <span>Message</span>
+                  <textarea
+                    name="message"
+                    rows={4}
+                    required
+                    className={`${fieldClass} resize-y`}
+                  />
+                </label>
+
+                <button
+                  type="submit"
+                  className="w-full rounded-xl bg-[#FCB432] px-5 py-3 text-base font-bold text-[#500000] hover:bg-[#ffd16d] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FCB432] disabled:opacity-60"
+                >
+                  {status === 'sending' ? 'Sending…' : 'Send Message'}
+                </button>
+              </fieldset>
+
+              <p role="status" className="mt-2 text-center text-sm text-[#FAF3E0]">
+                {status === 'sent' && 'Thanks for reaching out to TAMU ColorStack!'}
+                {status === 'error' && 'Your message could not be sent. Please try again.'}
+              </p>
+            </form>
           </div>
         </motion.div>
       </div>
